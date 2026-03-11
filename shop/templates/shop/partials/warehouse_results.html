@@ -1,0 +1,13 @@
+{% for wh in warehouses %}
+<button
+  class="np-option"
+  type="button"
+  role="option"
+  data-ref="{{ wh.ref }}"
+  data-name="{{ wh.name }}"
+>
+  {{ wh.name }}
+</button>
+{% empty %}
+<p class="np-option" style="pointer-events:none; color:var(--muted);">Відділень не знайдено</p>
+{% endfor %}

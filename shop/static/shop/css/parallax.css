@@ -1,0 +1,249 @@
+/* ── FIXED BACKGROUND LAYER ──────────────────────────────────────────── */
+/*
+ * Cross-platform fixed background (iOS Safari + Android Chrome safe):
+ * Uses a position:fixed <div> with absolutely-positioned <picture> children.
+ * Avoids background-attachment:fixed (broken on iOS) and position:sticky
+ * stacking (scroll-context issues on mobile).
+ *
+ * JS (initBgGallery) watches sections via IntersectionObserver and toggles
+ * .bg-img--active on the matching <picture>, triggering a CSS opacity crossfade.
+ */
+
+#bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+/* Dark scrim so text stays readable over any image */
+#bg-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.30);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Background images ────────────────────────────────────────────────── */
+
+.bg-img {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bg-img--active {
+  opacity: 1;
+}
+
+.bg-img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* ── Section transparency ────────────────────────────────────────────── */
+/*
+ * landing.css sets explicit background-color on individual section classes
+ * (.materials, .size-chart, etc.) with higher specificity than
+ * section[data-bg]. Override each class explicitly so the fixed bg shows.
+ */
+.hero,
+.colors-section,
+.materials,
+.size-chart,
+.features,
+.order-section {
+  background: transparent;
+}
+
+/* ── Scroll-snap (section paging) ────────────────────────────────────── */
+/*
+ * proximity (not mandatory) lets tall sections (order form on mobile)
+ * scroll freely internally without being force-snapped mid-content.
+ * iOS Safari 15+ and Android Chrome support scroll-snap natively.
+ */
+html {
+  scroll-snap-type: y proximity;
+}
+
+section[data-bg] {
+  scroll-snap-align: start;
+  min-height: 100svh;
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .bg-img {
+    transition: none;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────── */
+/* TEXT COLORS — ivory palette for all content on dark background images  */
+/* ────────────────────────────────────────────────────────────────────── */
+
+/* ── Base: every section inherits ivory ────────────────────────────────  */
+section[data-bg] {
+  color: var(--ivory);
+}
+
+/* ── Section labels ────────────────────────────────────────────────────  */
+section[data-bg] .section-label {
+  color: rgba(250, 247, 240, 0.60);
+}
+
+/* ── All headings ──────────────────────────────────────────────────────  */
+section[data-bg] h1,
+section[data-bg] h2,
+section[data-bg] h3 {
+  color: var(--ivory);
+}
+
+/* ── Hero specifics ────────────────────────────────────────────────────  */
+section[data-bg] .hero__eyebrow {
+  color: var(--accent-light);
+}
+
+section[data-bg] .hero__subtitle {
+  color: rgba(250, 247, 240, 0.80);
+}
+
+section[data-bg] .hero__price {
+  color: var(--ivory);
+}
+
+section[data-bg] .hero__price span {
+  color: rgba(250, 247, 240, 0.65);
+}
+
+/* ── Colors section ────────────────────────────────────────────────────  */
+section[data-bg] .color-name {
+  color: var(--ivory);
+}
+
+/* ── Material cards ────────────────────────────────────────────────────  */
+section[data-bg] .material-card {
+  border-color: rgba(250, 247, 240, 0.18);
+}
+
+section[data-bg] .material-card__num {
+  color: rgba(250, 247, 240, 0.28);
+}
+
+section[data-bg] .material-card__title {
+  color: var(--ivory);
+}
+
+section[data-bg] .material-card__text {
+  color: rgba(250, 247, 240, 0.75);
+}
+
+/* ── Section divider lines ─────────────────────────────────────────────  */
+section[data-bg] .features::before,
+section[data-bg] .materials::before,
+section[data-bg] .size-chart::before {
+  background: rgba(250, 247, 240, 0.15);
+}
+
+/* ── Size table ────────────────────────────────────────────────────────  */
+section[data-bg] .size-table__row {
+  border-color: rgba(250, 247, 240, 0.15);
+}
+
+section[data-bg] .size-table__row:hover {
+  background: rgba(250, 247, 240, 0.07);
+}
+
+section[data-bg] .size-table__row span:first-child {
+  color: var(--ivory);
+}
+
+section[data-bg] .size-table__row span:last-child {
+  color: rgba(250, 247, 240, 0.70);
+}
+
+/* ── Features ──────────────────────────────────────────────────────────  */
+section[data-bg] .feature__num {
+  color: rgba(250, 247, 240, 0.25);
+}
+
+section[data-bg] .feature__title {
+  color: var(--ivory);
+}
+
+section[data-bg] .feature__text {
+  color: rgba(250, 247, 240, 0.75);
+}
+
+/* ── Order section ─────────────────────────────────────────────────────  */
+section[data-bg] .order-section__sub {
+  color: rgba(250, 247, 240, 0.75);
+}
+
+/* ── Form fields on dark background ───────────────────────────────────  */
+section[data-bg] .form-label {
+  color: rgba(250, 247, 240, 0.65);
+}
+
+section[data-bg] .form-input,
+section[data-bg] .form-textarea {
+  color: var(--ivory);
+  border-color: rgba(250, 247, 240, 0.35);
+  caret-color: var(--ivory);
+}
+
+section[data-bg] .form-input:focus,
+section[data-bg] .form-textarea:focus {
+  border-color: var(--accent-light);
+}
+
+section[data-bg] .form-input::placeholder,
+section[data-bg] .form-textarea::placeholder {
+  color: rgba(250, 247, 240, 0.45);
+  opacity: 1;
+}
+
+section[data-bg] .form-color-preview {
+  border-color: rgba(250, 247, 240, 0.35);
+}
+
+section[data-bg] .form-color-name {
+  color: var(--ivory);
+}
+
+/* Size buttons in form */
+section[data-bg] .size-btn {
+  color: var(--ivory);
+  border-color: rgba(250, 247, 240, 0.30);
+}
+
+section[data-bg] .size-btn:hover {
+  border-color: var(--accent-light);
+  color: var(--accent-light);
+}
+
+section[data-bg] .size-btn.is-selected {
+  background: var(--ivory);
+  color: var(--dark);
+  border-color: var(--ivory);
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────  */
+.footer {
+  border-color: rgba(250, 247, 240, 0.15);
+  color: var(--ivory);
+}
+
+.footer__brand {
+  color: var(--ivory);
+}
+
+.footer__copy {
+  color: rgba(250, 247, 240, 0.60);
+}

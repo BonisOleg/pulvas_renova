@@ -1,0 +1,230 @@
+.order-form {
+  width: 100%;
+  max-width: 32rem;
+}
+
+.form-field {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  padding: 0.6rem 0;
+  font-size: 1rem;
+  color: var(--dark);
+  outline: none;
+  transition: border-color var(--transition);
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--accent);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.form-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A6F65' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  padding-right: 1.5rem;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 4rem;
+}
+
+.field-error {
+  font-size: 0.78rem;
+  color: #c0392b;
+  margin-top: 0.3rem;
+}
+
+/* ── NP Autocomplete ─────────────────────── */
+.np-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--ivory);
+  border: 1px solid var(--line);
+  z-index: 50;
+  max-height: 14rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: var(--shadow);
+}
+
+.np-dropdown:empty {
+  display: none;
+}
+
+.np-option {
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background var(--transition);
+  -webkit-tap-highlight-color: transparent;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  color: var(--dark);
+}
+
+.np-option:hover,
+.np-option:focus {
+  background: var(--accent-light);
+  outline: none;
+}
+
+.np-option + .np-option {
+  border-top: 1px solid var(--line);
+}
+
+/* ── Sizes grid ─────────────────────────── */
+.sizes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.size-btn {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--dark);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.size-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.size-btn.is-selected {
+  background: var(--dark);
+  color: var(--ivory);
+  border-color: var(--dark);
+}
+
+.size-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ── Color pick in form ───────────────────── */
+.form-color-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.form-color-dot {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.form-color-name {
+  font-size: 0.95rem;
+}
+
+/* ── Submit button ───────────────────────── */
+.btn-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  background: var(--dark);
+  color: var(--ivory);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 1.1rem 2rem;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition);
+  margin-top: 2rem;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.btn-submit:hover {
+  background: var(--accent);
+}
+
+.btn-submit[aria-busy="true"] {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ── Success state ───────────────────────── */
+.order-success {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.order-success__icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.order-success__title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+  margin-bottom: 0.75rem;
+}
+
+.order-success__text {
+  color: var(--muted);
+  font-size: 0.95rem;
+  max-width: 22rem;
+  margin: 0 auto;
+}
+
+/* ── Tablet ─────────────────────────────── */
+@media (min-width: 768px) {
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 2rem;
+  }
+}

@@ -1,0 +1,13 @@
+{% for city in cities %}
+<button
+  class="np-option"
+  type="button"
+  role="option"
+  data-ref="{{ city.ref }}"
+  data-name="{{ city.name }}"
+>
+  {{ city.name }}
+</button>
+{% empty %}
+<p class="np-option" style="pointer-events:none; color:var(--muted);">Нічого не знайдено</p>
+{% endfor %}
