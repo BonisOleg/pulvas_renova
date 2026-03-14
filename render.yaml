@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: pulvasstore
+    runtime: python
+    region: frankfurt
+    plan: starter
+    buildCommand: "./build.sh"
+    preDeployCommand: "python manage.py migrate --no-input"
+    startCommand: "gunicorn lorento.wsgi:application"
+    healthCheckPath: /
+    autoDeployTrigger: commit
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.13"
+      - key: DJANGO_SETTINGS_MODULE
+        value: lorento.settings
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        sync: false
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: pulvasstore-db
+          property: connectionString
+      - key: NP_API_KEY
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: TG_MEN_URL
+        value: "https://t.me/pulvas_men"
+      - key: TG_WOMEN_URL
+        value: "https://t.me/pulvas_women"
+
+databases:
+  - name: pulvasstore-db
+    plan: free
+    region: frankfurt

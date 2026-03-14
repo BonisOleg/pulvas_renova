@@ -4,193 +4,139 @@
 {% block body %}
 
 <div id="bg-layer" aria-hidden="true">
-  <picture class="bg-img bg-img--active" data-bg="0">
-    <source srcset="{% static 'img/1+.webp' %}" media="(min-width: 768px)">
-    <img src="{% static 'img/1.webp' %}" alt="" loading="eager" fetchpriority="high">
+  <picture class="bg-img bg-img--active">
+    <source srcset="{% static 'img/1.webp' %}" media="(min-width: 768px)">
+    <img src="{% static 'img/1m.webp' %}" alt="" loading="eager" fetchpriority="high">
   </picture>
-  <picture class="bg-img" data-bg="1">
-    <source srcset="{% static 'img/2+.webp' %}" media="(min-width: 768px)">
-    <img src="{% static 'img/2.webp' %}" alt="" loading="lazy">
+  <picture class="bg-img">
+    <source srcset="{% static 'img/2.webp' %}" media="(min-width: 768px)">
+    <img src="{% static 'img/2m.webp' %}" alt="" loading="lazy">
   </picture>
-  <picture class="bg-img" data-bg="2">
-    <source srcset="{% static 'img/3+.webp' %}" media="(min-width: 768px)">
-    <img src="{% static 'img/3.webp' %}" alt="" loading="lazy">
+  <picture class="bg-img">
+    <source srcset="{% static 'img/3.webp' %}" media="(min-width: 768px)">
+    <img src="{% static 'img/3m.webp' %}" alt="" loading="lazy">
   </picture>
-  <picture class="bg-img" data-bg="3">
-    <source srcset="{% static 'img/4+.webp' %}" media="(min-width: 768px)">
-    <img src="{% static 'img/4.webp' %}" alt="" loading="lazy">
-  </picture>
-  <picture class="bg-img" data-bg="4">
-    <source srcset="{% static 'img/5+.webp' %}" media="(min-width: 768px)">
-    <img src="{% static 'img/5.webp' %}" alt="" loading="lazy">
+  <picture class="bg-img">
+    <source srcset="{% static 'img/4.webp' %}" media="(min-width: 768px)">
+    <img src="{% static 'img/4m.webp' %}" alt="" loading="lazy">
   </picture>
 </div>
 
 <nav class="nav" aria-label="Навігація">
-  <span class="nav__logo">Lorento</span>
-  <button class="nav__cta" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})">
+  <span class="nav__logo">PulvasStore</span>
+  <button class="nav__cta" data-scroll-to="order" type="button">
     Замовити
   </button>
 </nav>
 
 <!-- ── HERO ────────────────────────────────── -->
 <section class="hero" data-bg="0" aria-label="Головна">
-
   <div class="hero__content">
-    <p class="hero__eyebrow">Нова колекція · 2025</p>
+    <p class="hero__eyebrow">{{ group.hero_eyebrow }}</p>
     <h1 class="hero__title">
-      <img
-        class="hero__logo-img"
-        src="{% static 'shop/img/logo.webp' %}"
-        alt="Lorento"
-        width="1828"
-        height="240"
-        loading="eager"
-        fetchpriority="high"
-      >
-      <em>Shoes</em>
+      <em class="hero__cat-text">{{ group.hero_heading|linebreaksbr }}</em>
     </h1>
-    <p class="hero__subtitle">
-      Кожна пара — відібрані матеріали, ручна праця<br>
-      і бездоганна посадка. Доставка по всій Україні.
-    </p>
+    <p class="hero__subtitle">{{ group.hero_subtitle }}</p>
     <p class="hero__price">
-      <span>Від</span> 2&nbsp;490 грн
+      <span>Від</span> {{ group.hero_price }}
     </p>
-    <button class="btn-primary" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})"
-      aria-label="Перейти до замовлення">
-      Обрати пару
+    <button class="btn-primary" data-scroll-to="order" type="button" aria-label="Перейти до замовлення">
+      Оформити заявку
     </button>
+    <div class="hero__catalog-btns">
+      <a href="{{ tg_men_url }}"
+         class="btn-catalog"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Чоловічий каталог у Telegram">
+        Чоловічий каталог
+      </a>
+      <a href="{{ tg_women_url }}"
+         class="btn-catalog"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Жіночий каталог у Telegram">
+        Жіночий каталог
+      </a>
+    </div>
   </div>
 </section>
 
-<!-- ── COLORS ────────────────────────────────── -->
-{% if colors %}
-<section class="colors-section" data-bg="1" aria-label="Кольори">
+<!-- ── COLORS + MATERIALS ────────────────────────────────── -->
+<section class="colors-section" data-bg="1" aria-label="Варіанти та матеріали">
+  {% if colors %}
   <p class="section-label">Доступні варіанти</p>
-  <h2 class="colors-section__heading">Оберіть<br>свій колір</h2>
+  <h2 class="colors-section__heading">Оберіть<br>свій варіант</h2>
 
   <div class="color-showcase">
-    <div class="color-main-img" aria-live="polite" aria-label="Фото взуття у обраному кольорі">
+    <div class="color-main-img" aria-live="polite" aria-label="Фото товару в обраному варіанті">
       {% for color in colors %}
-      <img src="{{ color.image.url }}" alt="Lorento — {{ color.name }}"
-        class="{% if not forloop.first %}is-hidden{% endif %}" data-color-id="{{ color.id }}"
-        loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+      <img
+        src="{{ color.image.url }}"
+        alt="PulvasStore — {{ color.name }}"
+        class="{% if not forloop.first %}is-hidden{% endif %}"
+        data-color-id="{{ color.id }}"
+        loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+      >
       {% endfor %}
     </div>
 
     <div class="color-info">
       <p class="color-name" id="color-name-display">{{ colors.0.name }}</p>
-      <div class="color-swatches" role="radiogroup" aria-label="Вибір кольору">
+      <div class="color-swatches" role="radiogroup" aria-label="Вибір варіанту">
         {% for color in colors %}
-        <button class="swatch {% if forloop.first %}is-active{% endif %}"
-          style="background-color: {{ color.hex_code }};" data-color-id="{{ color.id }}"
-          data-color-name="{{ color.name }}" data-color-img="{{ color.image.url }}" role="radio"
-          aria-checked="{% if forloop.first %}true{% else %}false{% endif %}" aria-label="{{ color.name }}"
-          type="button"></button>
+        <button
+          class="swatch {% if forloop.first %}is-active{% endif %}"
+          style="background-color: {{ color.hex_code }};"
+          data-color-id="{{ color.id }}"
+          data-color-name="{{ color.name }}"
+          data-color-img="{{ color.image.url }}"
+          role="radio"
+          aria-checked="{% if forloop.first %}true{% else %}false{% endif %}"
+          aria-label="{{ color.name }}"
+          type="button"
+        ></button>
         {% endfor %}
       </div>
-      <button class="btn-primary" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})"
-        aria-label="Замовити">
+      <button class="btn-primary" data-scroll-to="order" type="button" aria-label="Замовити">
         Замовити
       </button>
     </div>
   </div>
-</section>
-{% endif %}
+  {% endif %}
 
-<!-- ── MATERIALS ─────────────────────────────── -->
-<section class="materials" data-bg="2" aria-label="Матеріали">
-  <p class="section-label">Матеріали і деталі</p>
-  <h2 class="materials__heading">Кожна деталь —<br>навмисна</h2>
-
-  <div class="materials__grid">
-    <div class="material-card">
-      <p class="material-card__num">01</p>
-      <h3 class="material-card__title">Зовнішній покрив</h3>
-      <p class="material-card__text">Преміальна шкіра — з роками набуває характеру, зберігає форму і дозволяє нозі
-        дихати.</p>
-    </div>
-    <div class="material-card">
-      <p class="material-card__num">02</p>
-      <h3 class="material-card__title">Збереження форми</h3>
-      <p class="material-card__text">Натуральні волокна всередині конструкції тримають силует взуття і забезпечують
-        щільне прилягання.</p>
-    </div>
-    <div class="material-card">
-      <p class="material-card__num">03</p>
-      <h3 class="material-card__title">Внутрішній дотик</h3>
-      <p class="material-card__text">М'яка шкіра всередині — ніжна до ноги, не викликає подразнень, відчувається як
-        друга шкіра.</p>
-    </div>
-    <div class="materials__row-last">
+  <div class="materials-block">
+    <p class="section-label">{{ group.materials_label }}</p>
+    <h2 class="materials__heading">{{ group.materials_heading|linebreaksbr }}</h2>
+    <div class="materials__grid">
+      {% for material in group.materials %}
       <div class="material-card">
-        <p class="material-card__num">04</p>
-        <h3 class="material-card__title">Опора кроку</h3>
-        <p class="material-card__text">Пружна основа поглинає удари, не ковзає і витримує щоденне навантаження без
-          втрати форми.</p>
+        <p class="material-card__num">{{ material.num }}</p>
+        <h3 class="material-card__title">{{ material.title }}</h3>
+        <p class="material-card__text">{{ material.text }}</p>
       </div>
-      <div class="material-card">
-        <p class="material-card__num">05</p>
-        <h3 class="material-card__title">Основа комфорту</h3>
-        <p class="material-card__text">Шкіряна основа з м'яким підшаром — стопа відпочиває навіть після довгого дня.</p>
-      </div>
+      {% endfor %}
     </div>
   </div>
-</section>
-
-<!-- ── SIZE CHART ─────────────────────────────── -->
-<section class="size-chart" data-bg="3" aria-label="Таблиця розмірів">
-  <p class="section-label">Підбір розміру</p>
-  <h2 class="size-chart__heading">Таблиця<br>розмірів</h2>
-  <p class="size-chart__hint">Виміряйте ногу і оберіть свій розмір — ми підберемо ідеальну пару.</p>
-
-  <div class="size-table-wrap" role="table" aria-label="Таблиця розмірів взуття">
-    <div class="size-table__head" role="row">
-      <span role="columnheader">Розмір EU</span>
-      <span role="columnheader">Довжина стопи, см</span>
-    </div>
-    <div class="size-table__row" role="row"><span role="cell">39</span><span role="cell">26,1 см</span></div>
-    <div class="size-table__row" role="row"><span role="cell">40</span><span role="cell">26,8 см</span></div>
-    <div class="size-table__row" role="row"><span role="cell">41</span><span role="cell">27,4 см</span></div>
-    <div class="size-table__row" role="row"><span role="cell">42</span><span role="cell">28,1 см</span></div>
-    <div class="size-table__row" role="row"><span role="cell">43</span><span role="cell">28,8 см</span></div>
-    <div class="size-table__row" role="row"><span role="cell">44</span><span role="cell">29,5 см</span></div>
-    <div class="size-table__row" role="row"><span role="cell">45</span><span role="cell">30,1 см</span></div>
-  </div>
-
-  <button class="btn-primary size-chart__cta"
-    onclick="document.getElementById('order').scrollIntoView({behavior:'smooth'})" aria-label="Замовити">
-    Обрати свій розмір
-  </button>
 </section>
 
 <!-- ── FEATURES ────────────────────────────────── -->
-<section class="features" data-bg="4" aria-label="Переваги">
-  <p class="section-label">Чому Lorento</p>
+<section class="features" data-bg="2" aria-label="Переваги">
+  <p class="section-label">{{ group.features_label }}</p>
+  <h2 class="features__heading">Чому обирають<br>PulvasStore</h2>
   <div class="features__grid">
+    {% for feature in group.features %}
     <div class="feature">
-      <p class="feature__num">01</p>
-      <h3 class="feature__title">Натуральна шкіра</h3>
-      <p class="feature__text">Шкіряний верх, м'яка підкладка і комфортна основа — кожна деталь обрана з увагою до
-        якості.</p>
+      <p class="feature__num">{{ feature.num }}</p>
+      <h3 class="feature__title">{{ feature.title }}</h3>
+      <p class="feature__text">{{ feature.text }}</p>
     </div>
-    <div class="feature">
-      <p class="feature__num">02</p>
-      <h3 class="feature__title">Швидка доставка</h3>
-      <p class="feature__text">Відправляємо впродовж 24 годин. Доставка по всій Україні через Нову Пошту від 1–3 днів.
-      </p>
-    </div>
-    <div class="feature">
-      <p class="feature__num">03</p>
-      <h3 class="feature__title">Оплата при отриманні</h3>
-      <p class="feature__text">Оплачуєте лише при отриманні на відділенні. Ніякого ризику для вас.</p>
-    </div>
+    {% endfor %}
   </div>
 </section>
 
 <!-- ── ORDER ────────────────────────────────── -->
-<section class="order-section" data-bg="4" id="order" aria-label="Форма замовлення">
+<section class="order-section" data-bg="3" id="order" aria-label="Форма замовлення">
   <p class="section-label">Оформити замовлення</p>
   <h2 class="order-section__heading">Залишити<br>заявку</h2>
   <p class="order-section__sub">Ми зв'яжемось і підберемо зручний спосіб отримання.</p>
@@ -202,8 +148,8 @@
 
 <!-- ── FOOTER ────────────────────────────────── -->
 <footer class="footer" role="contentinfo">
-  <span class="footer__brand">Lorento</span>
-  <p class="footer__copy">© 2025 Lorento. Всі права захищені.</p>
+  <span class="footer__brand">PulvasStore</span>
+  <p class="footer__copy">© 2025 PulvasStore. Всі права захищені.</p>
 </footer>
 
 {% endblock %}

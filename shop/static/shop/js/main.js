@@ -88,18 +88,14 @@ function initCityAutocomplete() {
   const cityInput = document.getElementById('city-input');
   const cityRefInput = document.getElementById('city-ref');
   const cityDropdown = document.getElementById('city-dropdown');
-  const warehouseInput = document.getElementById('warehouse-input');
-  const warehouseRefInput = document.getElementById('warehouse-ref');
-  const warehouseDropdown = document.getElementById('warehouse-dropdown');
 
-  if (!cityInput) return;
+  if (!cityInput || !cityDropdown) return;
 
   const fetchCities = debounce(async (query) => {
     if (query.length < 2) {
       cityDropdown.innerHTML = '';
       return;
     }
-
     try {
       const res = await fetch('/api/np/cities/', {
         method: 'POST',
@@ -118,100 +114,74 @@ function initCityAutocomplete() {
   }, 300);
 
   cityInput.addEventListener('input', (e) => {
-    cityRefInput.value = '';
-    warehouseInput.value = '';
-    warehouseInput.placeholder = 'Оберіть місто спочатку';
-    warehouseRefInput.value = '';
-    warehouseDropdown.innerHTML = '';
+    if (cityRefInput) cityRefInput.value = '';
     fetchCities(e.target.value.trim());
   });
 
   function bindCityOptions() {
     cityDropdown.querySelectorAll('.np-option[data-ref]').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const ref = btn.dataset.ref;
-        const name = btn.dataset.name;
-
-        cityInput.value = name;
-        cityRefInput.value = ref;
-        cityDropdown.innerHTML = '';
-
-        warehouseInput.value = '';
-        warehouseInput.placeholder = 'Завантаження...';
-        warehouseInput.removeAttribute('readonly');
-
-        await loadWarehouses(ref);
-      });
-    });
-  }
-
-  async function loadWarehouses(cityRef) {
-    try {
-      const res = await fetch('/api/np/warehouses/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': getCsrfToken(),
-        },
-        body: JSON.stringify({ city_ref: cityRef }),
-      });
-      const html = await res.text();
-      warehouseDropdown.innerHTML = html;
-      warehouseInput.placeholder = 'Оберіть відділення';
-      bindWarehouseOptions();
-    } catch (_) {
-      warehouseInput.placeholder = 'Помилка. Спробуйте ще раз.';
-      warehouseDropdown.innerHTML = '';
-    }
-  }
-
-  function bindWarehouseOptions() {
-    warehouseDropdown.querySelectorAll('.np-option[data-ref]').forEach(btn => {
       btn.addEventListener('click', () => {
-        const ref = btn.dataset.ref;
-        const name = btn.dataset.name;
-
-        warehouseInput.value = name;
-        warehouseRefInput.value = ref;
-        warehouseDropdown.innerHTML = '';
+        cityInput.value = btn.dataset.name;
+        if (cityRefInput) cityRefInput.value = btn.dataset.ref;
+        cityDropdown.innerHTML = '';
       });
     });
   }
-
-  warehouseInput.addEventListener('focus', () => {
-    const ref = cityRefInput.value;
-    if (ref && !warehouseDropdown.children.length) {
-      loadWarehouses(ref);
-    }
-  });
 }
 
 /* ── Fixed background gallery ────────────────── */
 function initBgGallery() {
   const pictures = document.querySelectorAll('#bg-layer .bg-img');
-  const sections = document.querySelectorAll('section[data-bg]');
+  const sections = Array.from(document.querySelectorAll('section[data-bg]'));
   if (!pictures.length || !sections.length) return;
 
-  let activeIdx = 0;
+  const ratios = new Map(sections.map(s => [s, 0]));
+  let activeIdx = -1;
 
   function activate(idx) {
     if (idx === activeIdx) return;
+
+    const incoming = pictures[idx];
+    if (!incoming) return;
+
+    // Move any current --active to --prev so it stays fully visible underneath.
+    // Clean up any lingering --prev listeners from a previous transition first.
+    pictures.forEach(p => {
+      if (p.classList.contains('bg-img--active')) {
+        p.classList.remove('bg-img--active');
+        p.classList.add('bg-img--prev');
+      }
+    });
+
+    // Bring the new image on top with a fade-in.
+    incoming.classList.remove('bg-img--prev');
+    incoming.classList.add('bg-img--active');
     activeIdx = idx;
-    pictures.forEach((p, i) =>
-      p.classList.toggle('bg-img--active', i === idx)
-    );
+
+    // Once the new image has finished fading in, retire the --prev backdrop.
+    // Use { once: true } so the handler auto-removes itself.
+    incoming.addEventListener('transitionend', () => {
+      pictures.forEach(p => {
+        if (p !== incoming) p.classList.remove('bg-img--prev');
+      });
+    }, { once: true });
   }
 
-  // Pick the most-visible intersecting section and activate its background
-  const observer = new IntersectionObserver(
-    (entries) => {
-      const visible = entries
-        .filter(e => e.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-      if (visible) activate(Number(visible.target.dataset.bg));
-    },
-    { root: null, threshold: 0.4 }
-  );
+  function pickBest() {
+    let best = sections[0];
+    let bestRatio = -1;
+    for (const s of sections) {
+      const r = ratios.get(s);
+      if (r > bestRatio) { bestRatio = r; best = s; }
+    }
+    activate(Number(best.dataset.bg));
+  }
+
+  const thresholds = Array.from({ length: 21 }, (_, i) => i / 20);
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => ratios.set(e.target, e.intersectionRatio));
+    pickBest();
+  }, { threshold: thresholds });
 
   sections.forEach(s => observer.observe(s));
 }
@@ -225,6 +195,16 @@ function initDropdownDismiss() {
   });
 }
 
+/* ── Smooth scroll via data-scroll-to attr ── */
+function initScrollButtons() {
+  document.querySelectorAll('[data-scroll-to]').forEach(el => {
+    el.addEventListener('click', () => {
+      const target = document.getElementById(el.dataset.scrollTo);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
 /* ── HTMX re-init after swap ─────────────── */
 document.addEventListener('htmx:afterSwap', () => {
   initColorSwatches();
@@ -234,6 +214,7 @@ document.addEventListener('htmx:afterSwap', () => {
 
 /* ── Init ─────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
+  initScrollButtons();
   initColorSwatches();
   initSizeButtons();
   initCityAutocomplete();

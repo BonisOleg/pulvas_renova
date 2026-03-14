@@ -1,19 +1,31 @@
 import json
+
+from django.conf import settings
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import JsonResponse
 from django.views.decorators.http import require_POST, require_GET
-from django.views.decorators.csrf import csrf_exempt
 
 from .models import ShoeColor, Order
 from .forms import OrderForm
 from .services.novaposhta import search_cities, get_warehouses
 from .services.telegram import send_order_notification
+from .utils import get_group
 
 
 def landing(request):
+    group_key = request.GET.get("g", "")
+    group = get_group(group_key)
     colors = ShoeColor.objects.filter(is_available=True)
     form = OrderForm()
-    return render(request, "shop/landing.html", {"colors": colors, "form": form})
+    return render(request, "shop/landing.html", {
+        "group": group,
+        "page_title": group["title"],
+        "page_description": group["description"],
+        "tg_men_url": settings.TG_MEN_URL,
+        "tg_women_url": settings.TG_WOMEN_URL,
+        "colors": colors,
+        "form": form,
+    })
 
 
 @require_POST

@@ -26,27 +26,6 @@
   </div>
   {% endif %}
 
-  <!-- Size -->
-  <div class="form-field">
-    <span class="form-label">Розмір</span>
-    <div class="sizes-grid" role="group" aria-label="Оберіть розмір">
-      {% for size in form.size.field.choices %}
-        {% if size.0 %}
-        <button
-          type="button"
-          class="size-btn"
-          data-size="{{ size.0 }}"
-          aria-label="Розмір {{ size.1 }}"
-        >{{ size.1 }}</button>
-        {% endif %}
-      {% endfor %}
-    </div>
-    <input type="hidden" name="size" id="size-hidden-input" value="">
-    {% if form.size.errors %}
-    <p class="field-error">{{ form.size.errors.0 }}</p>
-    {% endif %}
-  </div>
-
   <!-- Name & Phone -->
   <div class="form-row">
     <div class="form-field">
@@ -80,8 +59,8 @@
     </div>
   </div>
 
-  <!-- City with NP autocomplete -->
-  <div class="form-field" style="position:relative;">
+  <!-- City -->
+  <div class="form-field">
     <label class="form-label" for="city-input">Місто</label>
     <input
       class="form-input"
@@ -89,31 +68,12 @@
       id="city-input"
       name="city_name"
       value="{{ form.city_name.value|default:'' }}"
-      placeholder="Почніть вводити місто..."
+      placeholder="Ваше місто"
       autocomplete="off"
       required
     >
     <input type="hidden" name="city_ref" id="city-ref" value="{{ form.city_ref.value|default:'' }}">
-    <div id="city-dropdown" class="np-dropdown" role="listbox" aria-label="Список міст"></div>
     {% if form.city_name.errors %}<p class="field-error">{{ form.city_name.errors.0 }}</p>{% endif %}
-  </div>
-
-  <!-- Warehouse -->
-  <div class="form-field" style="position:relative;">
-    <label class="form-label" for="warehouse-input">Відділення Нової Пошти</label>
-    <input
-      class="form-input"
-      type="text"
-      id="warehouse-input"
-      name="warehouse_name"
-      value="{{ form.warehouse_name.value|default:'' }}"
-      placeholder="Оберіть місто спочатку"
-      readonly
-      required
-    >
-    <input type="hidden" name="warehouse_ref" id="warehouse-ref" value="{{ form.warehouse_ref.value|default:'' }}">
-    <div id="warehouse-dropdown" class="np-dropdown" role="listbox" aria-label="Список відділень"></div>
-    {% if form.warehouse_name.errors %}<p class="field-error">{{ form.warehouse_name.errors.0 }}</p>{% endif %}
   </div>
 
   <!-- Comment -->
