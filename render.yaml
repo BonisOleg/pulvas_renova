@@ -11,7 +11,7 @@ services:
     autoDeployTrigger: commit
     envVars:
       - key: PYTHON_VERSION
-        value: "3.13"
+        value: "3.13.2"
       - key: DJANGO_SETTINGS_MODULE
         value: lorento.settings
       - key: SECRET_KEY
