@@ -19,9 +19,9 @@ services:
       - key: DEBUG
         value: "False"
       - key: ALLOWED_HOSTS
-        sync: false
+        value: "pulvasstore.onrender.com"
       - key: CSRF_TRUSTED_ORIGINS
-        sync: false
+        value: "https://pulvasstore.onrender.com"
       - key: DATABASE_URL
         fromDatabase:
           name: pulvasstore-db
