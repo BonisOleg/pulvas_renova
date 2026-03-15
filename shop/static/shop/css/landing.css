@@ -478,6 +478,25 @@
   color: var(--muted);
 }
 
+.footer__dev {
+  font-size: 0.72rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.footer__dev-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.footer__dev-link:hover {
+  color: var(--ivory);
+}
+
 /* ── TABLET 768px ─────────────────────────── */
 @media (min-width: 768px) {
   .hero__img-wrap {
