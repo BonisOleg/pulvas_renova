@@ -11,6 +11,10 @@ SECRET_KEY = os.getenv("SECRET_KEY", "django-insecure-fallback-key")
 DEBUG = os.getenv("DEBUG", "True") == "True"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
+_render_host = os.getenv("RENDER_EXTERNAL_HOSTNAME")
+if _render_host:
+    ALLOWED_HOSTS.append(_render_host)
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
