@@ -198,7 +198,7 @@ section[data-bg] .feature {
 }
 
 section[data-bg] .feature__num {
-  color: rgba(250, 247, 240, 0.25);
+  color: rgb(250, 247, 240);
 }
 
 section[data-bg] .feature__title {
