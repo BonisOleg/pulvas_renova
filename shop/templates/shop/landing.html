@@ -128,8 +128,10 @@
     {% for feature in group.features %}
     <div class="feature">
       <p class="feature__num">{{ feature.num }}</p>
-      <h3 class="feature__title">{{ feature.title }}</h3>
-      <p class="feature__text">{{ feature.text }}</p>
+      <div class="feature__body">
+        <h3 class="feature__title">{{ feature.title }}</h3>
+        <p class="feature__text">{{ feature.text }}</p>
+      </div>
     </div>
     {% endfor %}
   </div>

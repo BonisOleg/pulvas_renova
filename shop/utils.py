@@ -556,7 +556,7 @@ DEFAULT_GROUP: dict = {
         "Louis Vuitton, Gucci, Hermès, Chanel та інші."
     ),
     "hero_eyebrow": "Люксові речі · 2025",
-    "hero_heading": "PulvasStore\nрозкіш доступна",
+    "hero_heading": "PulvasStore\nбезкомпромісна якість",
     "hero_subtitle": (
         "Сумки, взуття, одяг та аксесуари від провідних будинків моди. "
         "Доставка по всьому світу."
