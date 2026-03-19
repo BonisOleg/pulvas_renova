@@ -16,7 +16,15 @@ def landing(request):
     group_key = request.GET.get("g", "")
     group = get_group(group_key)
     colors = ShoeColor.objects.filter(is_available=True)
-    form = OrderForm()
+    utm: dict[str, str] = {
+        "ad_group": group_key,
+        "utm_source": request.GET.get("utm_source", ""),
+        "utm_medium": request.GET.get("utm_medium", ""),
+        "utm_campaign": request.GET.get("utm_campaign", ""),
+        "utm_content": request.GET.get("utm_content", ""),
+        "utm_term": request.GET.get("utm_term", ""),
+    }
+    form = OrderForm(initial=utm)
     return render(request, "shop/landing.html", {
         "group": group,
         "page_title": group["title"],

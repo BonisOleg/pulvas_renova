@@ -24,6 +24,22 @@ def send_order_notification(order) -> bool:
     if order.comment:
         text += f"\n💬 <b>Коментар:</b> {order.comment}"
 
+    marketing_lines: list[str] = []
+    if order.ad_group:
+        marketing_lines.append(f"  Група (?g=): {order.ad_group}")
+    if order.utm_source:
+        marketing_lines.append(f"  Source: {order.utm_source}")
+    if order.utm_medium:
+        marketing_lines.append(f"  Medium: {order.utm_medium}")
+    if order.utm_campaign:
+        marketing_lines.append(f"  Campaign: {order.utm_campaign}")
+    if order.utm_content:
+        marketing_lines.append(f"  Content: {order.utm_content}")
+    if order.utm_term:
+        marketing_lines.append(f"  Term: {order.utm_term}")
+    if marketing_lines:
+        text += "\n\n📊 <b>Джерело трафіку:</b>\n" + "\n".join(marketing_lines)
+
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     try:
         response = requests.post(

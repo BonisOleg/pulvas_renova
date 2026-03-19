@@ -27,6 +27,12 @@ class OrderForm(forms.ModelForm):
             "warehouse_name",
             "warehouse_ref",
             "comment",
+            "ad_group",
+            "utm_source",
+            "utm_medium",
+            "utm_campaign",
+            "utm_content",
+            "utm_term",
         ]
         widgets = {
             "name": forms.TextInput(
@@ -54,6 +60,12 @@ class OrderForm(forms.ModelForm):
             "comment": forms.Textarea(
                 attrs={"placeholder": "Коментар (необов'язково)", "rows": 2}
             ),
+            "ad_group": forms.HiddenInput(),
+            "utm_source": forms.HiddenInput(),
+            "utm_medium": forms.HiddenInput(),
+            "utm_campaign": forms.HiddenInput(),
+            "utm_content": forms.HiddenInput(),
+            "utm_term": forms.HiddenInput(),
         }
 
     def clean_phone(self):

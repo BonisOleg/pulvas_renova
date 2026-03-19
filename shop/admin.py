@@ -29,13 +29,23 @@ class OrderAdmin(admin.ModelAdmin):
         "size",
         "city_name",
         "warehouse_name",
+        "ad_group",
+        "utm_source",
         "status",
         "created_at",
     )
-    list_filter = ("status", "shoe_color", "size")
-    search_fields = ("name", "phone", "city_name")
+    list_filter = ("status", "shoe_color", "size", "ad_group", "utm_source")
+    search_fields = ("name", "phone", "city_name", "ad_group", "utm_campaign")
     list_editable = ("status",)
-    readonly_fields = ("created_at",)
+    readonly_fields = (
+        "created_at",
+        "ad_group",
+        "utm_source",
+        "utm_medium",
+        "utm_campaign",
+        "utm_content",
+        "utm_term",
+    )
     date_hierarchy = "created_at"
 
     fieldsets = (
@@ -53,4 +63,18 @@ class OrderAdmin(admin.ModelAdmin):
             },
         ),
         ("Статус", {"fields": ("status", "created_at")}),
+        (
+            "Маркетинг",
+            {
+                "fields": (
+                    "ad_group",
+                    "utm_source",
+                    "utm_medium",
+                    "utm_campaign",
+                    "utm_content",
+                    "utm_term",
+                ),
+                "classes": ("collapse",),
+            },
+        ),
     )

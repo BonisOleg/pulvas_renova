@@ -500,6 +500,42 @@
   color: var(--ivory);
 }
 
+/* ── KEYWORDS CLOUD ──────────────────────── */
+.keywords-section {
+  padding: var(--section-pad) var(--gap);
+  background-color: var(--dark);
+  border-top: 1px solid rgba(250, 247, 240, 0.08);
+}
+
+.keywords-section .section-label {
+  color: rgba(250, 247, 240, 0.40);
+  margin-bottom: 1.5rem;
+}
+
+.keywords-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.keyword-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-family: var(--font-sans);
+  color: rgba(250, 247, 240, 0.50);
+  background-color: rgba(250, 247, 240, 0.06);
+  border: 1px solid rgba(250, 247, 240, 0.10);
+  border-radius: var(--radius);
+  padding: 0.3em 0.65em;
+  line-height: 1.4;
+  transition: color var(--transition), background-color var(--transition);
+}
+
+.keyword-tag:hover {
+  color: rgba(250, 247, 240, 0.80);
+  background-color: rgba(250, 247, 240, 0.10);
+}
+
 /* ── TABLET 768px ─────────────────────────── */
 @media (min-width: 768px) {
   .hero__img-wrap {

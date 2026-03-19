@@ -148,6 +148,18 @@
   </div>
 </section>
 
+<!-- ── KEYWORDS ────────────────────────────────── -->
+{% if group.keywords %}
+<section class="keywords-section" aria-label="Популярні запити">
+  <p class="section-label">Популярні запити</p>
+  <div class="keywords-cloud">
+    {% for kw in group.keywords %}
+    <span class="keyword-tag">#{{ kw|lower }}</span>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
 <!-- ── FOOTER ────────────────────────────────── -->
 <footer class="footer" role="contentinfo">
   <div class="footer__info">

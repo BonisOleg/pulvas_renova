@@ -49,6 +49,14 @@ class Order(models.Model):
     warehouse_name = models.CharField("Відділення НП", max_length=300)
     warehouse_ref = models.CharField("Ref відділення НП", max_length=100, blank=True)
     comment = models.TextField("Коментар", blank=True)
+
+    ad_group = models.CharField("Група оголошень (?g=)", max_length=100, blank=True, default="")
+    utm_source = models.CharField("UTM Source", max_length=200, blank=True, default="")
+    utm_medium = models.CharField("UTM Medium", max_length=200, blank=True, default="")
+    utm_campaign = models.CharField("UTM Campaign", max_length=200, blank=True, default="")
+    utm_content = models.CharField("UTM Content", max_length=200, blank=True, default="")
+    utm_term = models.CharField("UTM Term", max_length=200, blank=True, default="")
+
     status = models.CharField(
         "Статус", max_length=20, choices=STATUS_CHOICES, default=STATUS_NEW
     )
