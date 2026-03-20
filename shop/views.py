@@ -51,7 +51,7 @@ def create_order(request):
         request,
         "shop/partials/order_form.html",
         {"form": form, "tg_contact_url": settings.TG_CONTACT_URL},
-        status=422,
+        status=200,
     )
 
 
