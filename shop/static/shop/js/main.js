@@ -102,12 +102,16 @@ function initPhoneMask() {
   const PREFIX = '+380';
 
   function formatDigits(digits) {
-    // digits — рівно 9 цифр оператора (після 380)
-    const d = digits.padEnd(9, '_').split('');
-    return (
-      `${PREFIX} (${d[0]}${d[1]}) ` +
-      `${d[2]}${d[3]}${d[4]}-${d[5]}${d[6]}-${d[7]}${d[8]}`
-    );
+    const d = digits.slice(0, 9);
+    if (!d.length) return PREFIX;
+    let r = `${PREFIX} (${d.substring(0, 2)}`;
+    if (d.length <= 2) return r;
+    r += `) ${d.substring(2, 5)}`;
+    if (d.length <= 5) return r;
+    r += `-${d.substring(5, 7)}`;
+    if (d.length <= 7) return r;
+    r += `-${d.substring(7, 9)}`;
+    return r;
   }
 
   function extractDigits(value) {
@@ -129,7 +133,7 @@ function initPhoneMask() {
       return;
     }
 
-    const formatted = formatDigits(digits).replace(/_/g, '');
+    const formatted = formatDigits(digits);
     input.value = formatted;
 
     // відновити позицію курсору приблизно там само
@@ -141,7 +145,7 @@ function initPhoneMask() {
   function lockPrefix(input) {
     if (!input.value.startsWith(PREFIX)) {
       const digits = extractDigits(input.value).slice(0, 9);
-      input.value = digits.length ? formatDigits(digits).replace(/_/g, '') : '';
+      input.value = digits.length ? formatDigits(digits) : '';
     }
   }
 
@@ -149,7 +153,7 @@ function initPhoneMask() {
     // Ініціалізація: якщо є значення (після помилки серверу) — відформатувати
     if (input.value) {
       const digits = extractDigits(input.value).slice(0, 9);
-      if (digits.length) input.value = formatDigits(digits).replace(/_/g, '');
+      if (digits.length) input.value = formatDigits(digits);
     }
 
     input.addEventListener('focus', () => {
@@ -170,13 +174,31 @@ function initPhoneMask() {
 
     input.addEventListener('keydown', e => {
       const pos = input.selectionStart;
+      const selEnd = input.selectionEnd;
       const minPos = PREFIX.length + 1; // після "+380 "
 
-      // Заборонити видалення префіксу
-      if ((e.key === 'Backspace' || e.key === 'Delete') && pos <= minPos) {
-        e.preventDefault();
-        input.setSelectionRange(minPos, minPos);
-        return;
+      if (e.key === 'Backspace' && pos === selEnd) {
+        if (pos <= minPos) {
+          e.preventDefault();
+          input.setSelectionRange(minPos, minPos);
+          return;
+        }
+        // Пропустити форматні символи назад і видалити саме цифру
+        const val = input.value;
+        let p = pos;
+        while (p > minPos && !/\d/.test(val[p - 1])) p--;
+        if (p <= minPos) {
+          e.preventDefault();
+          input.setSelectionRange(minPos, minPos);
+          return;
+        }
+        if (p < pos) {
+          e.preventDefault();
+          input.value = val.slice(0, p - 1) + val.slice(pos);
+          input.setSelectionRange(p - 1, p - 1);
+          input.dispatchEvent(new Event('input'));
+          return;
+        }
       }
 
       // Дозволити лише цифри, спецклавіші та клавіші навігації
@@ -212,7 +234,7 @@ function initPhoneMask() {
       }
 
       if (operatorDigits.length) {
-        input.value = formatDigits(operatorDigits.slice(0, 9)).replace(/_/g, '');
+        input.value = formatDigits(operatorDigits.slice(0, 9));
         input.setSelectionRange(input.value.length, input.value.length);
       }
     });
