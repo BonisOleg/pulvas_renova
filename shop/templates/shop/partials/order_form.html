@@ -16,24 +16,6 @@
   {{ form.utm_content }}
   {{ form.utm_term }}
 
-  <!-- Hidden color input -->
-  {{ form.shoe_color }}
-
-  <!-- Color selector -->
-  {% if form.shoe_color.field.queryset %}
-  <div class="form-field">
-    <span class="form-label">Колір</span>
-    <div class="form-color-preview" id="form-color-preview">
-      {% with color=form.shoe_color.field.queryset.first %}
-      <span class="form-color-dot" id="form-color-dot" style="background: {{ color.hex_code }};"></span>
-      <span class="form-color-name" id="form-color-name-text">{{ color.name }}</span>
-      {% endwith %}
-    </div>
-    <p class="field-error">{{ form.shoe_color.errors }}</p>
-  </div>
-  {% endif %}
-
-  <!-- Name & Phone -->
   <div class="form-row">
     <div class="form-field">
       <label class="form-label" for="{{ form.name.id_for_label }}">Ім'я</label>
@@ -66,36 +48,25 @@
     </div>
   </div>
 
-  <!-- City -->
   <div class="form-field">
-    <label class="form-label" for="city-input">Місто</label>
-    <input
-      class="form-input"
-      type="text"
-      id="city-input"
-      name="city_name"
-      value="{{ form.city_name.value|default:'' }}"
-      placeholder="Ваше місто"
-      autocomplete="off"
-      required
-    >
-    <input type="hidden" name="city_ref" id="city-ref" value="{{ form.city_ref.value|default:'' }}">
-    {% if form.city_name.errors %}<p class="field-error">{{ form.city_name.errors.0 }}</p>{% endif %}
-  </div>
-
-  <!-- Comment -->
-  <div class="form-field">
-    <label class="form-label" for="{{ form.comment.id_for_label }}">Коментар</label>
+    <label class="form-label" for="{{ form.comment.id_for_label }}">Що хочу замовити</label>
     <textarea
       class="form-textarea"
       id="{{ form.comment.id_for_label }}"
       name="{{ form.comment.html_name }}"
-      placeholder="Необов'язково"
-      rows="2"
+      placeholder="Опиши річ, назву моделі або встав посилання з сайту бренду / Instagram / Pinterest"
+      rows="3"
     >{{ form.comment.value|default:'' }}</textarea>
   </div>
 
-  <button class="btn-submit" type="submit" id="submit-btn" aria-label="Відправити замовлення">
-    <span>Оформити замовлення</span>
+  <button class="btn-submit" type="submit" id="submit-btn" aria-label="Відправити запит">
+    <span>Відправити запит</span>
   </button>
+
+  <p class="form-tg-hint">
+    Або одразу напишіть нам:
+    <a href="{{ tg_contact_url }}" target="_blank" rel="noopener noreferrer" class="form-tg-link">
+      Telegram →
+    </a>
+  </p>
 </form>

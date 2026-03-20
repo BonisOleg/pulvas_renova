@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% load static %}<!DOCTYPE html>
 <html lang="uk">
 <head>
   <!-- Google Tag Manager -->
@@ -17,11 +17,13 @@
   <title>{% block title %}{{ page_title|default:"PulvasStore — Люксові аксесуари та взуття" }}{% endblock %}</title>
   <meta name="description" content="{% block description %}{{ page_description|default:"Купити брендові сумки, взуття, одяг та аксесуари з доставкою по всьому світу" }}{% endblock %}">
 
+  <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+  <link rel="apple-touch-icon" href="{% static 'img/favicon.png' %}">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
-  {% load static %}
   <link rel="stylesheet" href="{% static 'shop/css/vars.css' %}">
   <link rel="stylesheet" href="{% static 'shop/css/base.css' %}">
   <link rel="stylesheet" href="{% static 'shop/css/landing.css' %}">

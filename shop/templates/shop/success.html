@@ -1,0 +1,22 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}Дякуємо за замовлення — PulvasStore{% endblock %}
+{% block description %}Ваша заявка прийнята. Ми зв'яжемось з вами найближчим часом.{% endblock %}
+
+{% block body %}
+<div class="success-page">
+  <div class="success-page__card">
+    <div class="success-page__icon" aria-hidden="true">✦</div>
+    <h1 class="success-page__title">
+      {% if order %}Дякуємо,<br>{{ order.name }}!{% else %}Дякуємо за заявку!{% endif %}
+    </h1>
+    <p class="success-page__text">
+      Ваша заявка прийнята. Менеджер зателефонує вам найближчим часом для підтвердження замовлення.
+    </p>
+    <a href="/" class="btn-primary" aria-label="Повернутися на головну">
+      На головну
+    </a>
+  </div>
+</div>
+{% endblock %}

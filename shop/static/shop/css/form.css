@@ -197,6 +197,25 @@
   pointer-events: none;
 }
 
+/* ── Telegram hint under submit ──────────── */
+.form-tg-hint {
+  text-align: center;
+  font-size: 0.82rem;
+  color: rgba(250, 247, 240, 0.55);
+  margin-top: 1.25rem;
+}
+
+.form-tg-link {
+  color: var(--accent-light);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+
+.form-tg-link:hover {
+  color: var(--ivory);
+}
+
 /* ── Success state ───────────────────────── */
 .order-success {
   padding: 3rem 0;
@@ -228,4 +247,45 @@
     grid-template-columns: 1fr 1fr;
     gap: 0 2rem;
   }
+}
+
+/* ── Success page ───────────────────────── */
+.success-page {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--section-pad) var(--gap);
+  background: var(--ivory);
+}
+
+.success-page__card {
+  max-width: 32rem;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.success-page__icon {
+  font-size: 3.5rem;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.success-page__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--dark);
+}
+
+.success-page__text {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 24rem;
 }

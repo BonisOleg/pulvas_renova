@@ -113,5 +113,6 @@ NP_API_KEY = os.getenv("NP_API_KEY", "")
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
 
-TG_MEN_URL = os.getenv("TG_MEN_URL", "https://t.me/pulvas_men")
-TG_WOMEN_URL = os.getenv("TG_WOMEN_URL", "https://t.me/pulvas_women")
+TG_MEN_URL = os.getenv("TG_MEN_URL", "https://t.me/Pulvas_store")
+TG_WOMEN_URL = os.getenv("TG_WOMEN_URL", "https://t.me/Pulvas_store_women")
+TG_CONTACT_URL = os.getenv("TG_CONTACT_URL", "https://t.me/DanaAfanasenko")

@@ -74,10 +74,18 @@
  * Override each class explicitly so the fixed bg shows through.
  */
 .hero,
+.how-it-works,
 .colors-section,
+.counters,
 .features,
 .order-section {
   background: transparent;
+}
+
+.how-it-works,
+.counters {
+  min-height: auto;
+  scroll-snap-align: none;
 }
 
 section[data-bg] {

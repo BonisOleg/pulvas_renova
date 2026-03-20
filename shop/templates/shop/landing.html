@@ -24,9 +24,12 @@
 
 <nav class="nav" aria-label="Навігація">
   <span class="nav__logo">PulvasStore</span>
-  <button class="nav__cta" data-scroll-to="order" type="button">
-    Замовити
-  </button>
+  <a href="{{ tg_contact_url }}"
+     class="nav__cta"
+     target="_blank"
+     rel="noopener noreferrer">
+    Написати в Telegram
+  </a>
 </nav>
 
 <!-- ── HERO ────────────────────────────────── -->
@@ -37,12 +40,26 @@
       <em class="hero__cat-text">{{ group.hero_heading|linebreaksbr }}</em>
     </h1>
     <p class="hero__subtitle">{{ group.hero_subtitle }}</p>
-    <p class="hero__price">
-      <span>Від</span> {{ group.hero_price }}
+    <p class="hero__subtitle hero__subtitle--fixed">
+      Переглянь каталог або надішли фото будь-якої брендової речі — доставимо
+      1:1 до оригіналу. Матеріали, дизайн, упаковка, бірки — все як у бутику.
+      Ціна приємно здивує.
     </p>
-    <button class="btn-primary" data-scroll-to="order" type="button" aria-label="Перейти до замовлення">
-      Оформити заявку
-    </button>
+
+    <div class="hero__cta-group">
+      <a href="{{ tg_contact_url }}"
+         class="btn-primary"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Написати в Telegram">
+        📱 Написати в Telegram
+      </a>
+      <button class="btn-secondary" data-scroll-to="order" type="button"
+              aria-label="Залишити заявку">
+        Залишити заявку
+      </button>
+    </div>
+
     <div class="hero__catalog-btns">
       <a href="{{ tg_men_url }}"
          class="btn-catalog"
@@ -57,6 +74,104 @@
          rel="noopener noreferrer"
          aria-label="Жіночий каталог у Telegram">
         Жіночий каталог
+      </a>
+    </div>
+    <p class="hero__catalog-caption">
+      Щоденні оновлення наявності — підпишись, щоб нічого не пропустити
+    </p>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ────────────────────────────────── -->
+<section class="how-it-works" data-bg="3" aria-label="Як це працює">
+  <div class="how-it-works__inner">
+    <p class="section-label">Як це працює</p>
+    <h2 class="how-it-works__heading">Два способи замовити</h2>
+    <p class="how-it-works__sub">Обирай зручний — обидва прості</p>
+
+    <div class="how-it-works__variants">
+      <div class="how-it-works__variant">
+        <h3 class="how-it-works__variant-title">Є в каталозі</h3>
+        <div class="how-it-works__steps">
+          <div class="how-it-works__step">
+            <span class="how-it-works__step-num">01</span>
+            <div>
+              <h4 class="how-it-works__step-title">Переглянь каталог</h4>
+              <p class="how-it-works__step-text">
+                Заходь у чоловічий або жіночий Telegram-канал — щодня нові
+                позиції від усіх брендів. Вся наявність у реальному часі.
+              </p>
+            </div>
+          </div>
+          <div class="how-it-works__step">
+            <span class="how-it-works__step-num">02</span>
+            <div>
+              <h4 class="how-it-works__step-title">Обирай і пиши менеджеру</h4>
+              <p class="how-it-works__step-text">
+                Сподобалась річ — напиши нам, і ми оформимо доставку.
+              </p>
+            </div>
+          </div>
+          <div class="how-it-works__step">
+            <span class="how-it-works__step-num">03</span>
+            <div>
+              <h4 class="how-it-works__step-title">Отримуєш з доставкою</h4>
+              <p class="how-it-works__step-text">
+                Матеріали, дизайн, упаковка, бірки — 1:1 до оригіналу.
+                Ціна приємно здивує.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-it-works__divider">
+        <span>або</span>
+      </div>
+
+      <div class="how-it-works__variant">
+        <h3 class="how-it-works__variant-title">Хочеш конкретну річ</h3>
+        <div class="how-it-works__steps">
+          <div class="how-it-works__step">
+            <span class="how-it-works__step-num">01</span>
+            <div>
+              <h4 class="how-it-works__step-title">Надішли фото або посилання</h4>
+              <p class="how-it-works__step-text">
+                Знайшов річ в Instagram, Pinterest або на офіційному сайті
+                бренду — скинь нам фото чи посилання в Telegram.
+              </p>
+            </div>
+          </div>
+          <div class="how-it-works__step">
+            <span class="how-it-works__step-num">02</span>
+            <div>
+              <h4 class="how-it-works__step-title">Ми підтверджуємо і називаємо ціну</h4>
+              <p class="how-it-works__step-text">
+                Менеджер зв'яжеться впродовж кількох годин, підтвердить
+                і озвучить вартість.
+              </p>
+            </div>
+          </div>
+          <div class="how-it-works__step">
+            <span class="how-it-works__step-num">03</span>
+            <div>
+              <h4 class="how-it-works__step-title">Отримуєш з доставкою</h4>
+              <p class="how-it-works__step-text">
+                Матеріали, дизайн, упаковка, бірки — 1:1 до оригіналу.
+                Ціна значно нижча за оригінал.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="how-it-works__cta">
+      <a href="{{ tg_contact_url }}"
+         class="btn-primary"
+         target="_blank"
+         rel="noopener noreferrer">
+        📱 Написати в Telegram
       </a>
     </div>
   </div>
@@ -87,10 +202,10 @@
         {% for color in colors %}
         <button
           class="swatch {% if forloop.first %}is-active{% endif %}"
-          style="background-color: {{ color.hex_code }};"
           data-color-id="{{ color.id }}"
           data-color-name="{{ color.name }}"
           data-color-img="{{ color.image.url }}"
+          data-hex="{{ color.hex_code }}"
           role="radio"
           aria-checked="{% if forloop.first %}true{% else %}false{% endif %}"
           aria-label="{{ color.name }}"
@@ -98,9 +213,6 @@
         ></button>
         {% endfor %}
       </div>
-      <button class="btn-primary" data-scroll-to="order" type="button" aria-label="Замовити">
-        Замовити
-      </button>
     </div>
   </div>
   {% endif %}
@@ -120,6 +232,28 @@
   </div>
 </section>
 
+<!-- ── COUNTERS ────────────────────────────────── -->
+<section class="counters" data-bg="0" aria-label="PulvasStore у цифрах">
+  <div class="counters__inner">
+    <p class="section-label">Про нас</p>
+    <h2 class="counters__heading">PulvasStore у цифрах</h2>
+    <div class="counters__grid">
+      <div class="counter">
+        <span class="counter__value">1000+</span>
+        <span class="counter__label">задоволених клієнтів</span>
+      </div>
+      <div class="counter">
+        <span class="counter__value">7 років</span>
+        <span class="counter__label">на ринку</span>
+      </div>
+      <div class="counter">
+        <span class="counter__value">15+</span>
+        <span class="counter__label">країн — доставляємо по всьому світу</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ── FEATURES ────────────────────────────────── -->
 <section class="features" data-bg="2" aria-label="Переваги">
   <p class="section-label">{{ group.features_label }}</p>
@@ -135,13 +269,25 @@
     </div>
     {% endfor %}
   </div>
+  <div class="features__cta">
+    <a href="{{ tg_contact_url }}"
+       class="features__tg-link"
+       target="_blank"
+       rel="noopener noreferrer">
+      Написати менеджеру в Telegram →
+    </a>
+  </div>
 </section>
 
 <!-- ── ORDER ────────────────────────────────── -->
 <section class="order-section" data-bg="3" id="order" aria-label="Форма замовлення">
-  <p class="section-label">Оформити замовлення</p>
+  <p class="section-label">Хочу замовити 1:1</p>
   <h2 class="order-section__heading">Залишити<br>заявку</h2>
-  <p class="order-section__sub">Ми зв'яжемось і підберемо зручний спосіб отримання.</p>
+  <p class="order-section__sub">
+    Залиш контакт — і опиши що хочеш, або просто надішли посилання на річ.
+    А якщо хочеш переглянути що є — заходь у наш каталог у Telegram.
+    Менеджер зв'яжеться і все порахує.
+  </p>
 
   <div id="order-form-wrap">
     {% include "shop/partials/order_form.html" %}
@@ -150,8 +296,8 @@
 
 <!-- ── KEYWORDS ────────────────────────────────── -->
 {% if group.keywords %}
-<section class="keywords-section" aria-label="Популярні запити">
-  <p class="section-label">Популярні запити</p>
+<section class="keywords-section" aria-label="Що шукають наші клієнти">
+  <p class="section-label">Що шукають наші клієнти</p>
   <div class="keywords-cloud">
     {% for kw in group.keywords %}
     <span class="keyword-tag">#{{ kw|lower }}</span>

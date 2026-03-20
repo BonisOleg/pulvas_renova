@@ -1,12 +1,12 @@
 import json
 
 from django.conf import settings
-from django.shortcuts import render
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST, require_GET
+from django.http import HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404, render
+from django.views.decorators.http import require_GET, require_POST
 
-from .models import ShoeColor, Order
 from .forms import OrderForm
+from .models import Order, ShoeColor
 from .services.novaposhta import search_cities, get_warehouses
 from .services.telegram import send_order_notification
 from .utils import get_group
@@ -31,6 +31,7 @@ def landing(request):
         "page_description": group["description"],
         "tg_men_url": settings.TG_MEN_URL,
         "tg_women_url": settings.TG_WOMEN_URL,
+        "tg_contact_url": settings.TG_CONTACT_URL,
         "colors": colors,
         "form": form,
     })
@@ -42,13 +43,25 @@ def create_order(request):
     if form.is_valid():
         order = form.save()
         send_order_notification(order)
-        return render(request, "shop/partials/order_success.html", {"order": order})
+        request.session["last_order_id"] = order.id
+        response = HttpResponse(status=204)
+        response["HX-Redirect"] = "/success/"
+        return response
     return render(
         request,
         "shop/partials/order_form.html",
-        {"form": form},
+        {"form": form, "tg_contact_url": settings.TG_CONTACT_URL},
         status=422,
     )
+
+
+@require_GET
+def order_success_page(request):
+    order_id = request.session.pop("last_order_id", None)
+    order: Order | None = None
+    if order_id is not None:
+        order = Order.objects.filter(pk=order_id).first()
+    return render(request, "shop/success.html", {"order": order})
 
 
 @require_POST

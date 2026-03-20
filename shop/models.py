@@ -43,11 +43,11 @@ class Order(models.Model):
         blank=True,
         verbose_name="Колір",
     )
-    size = models.CharField("Розмір", max_length=5)
-    city_name = models.CharField("Місто", max_length=200)
-    city_ref = models.CharField("Ref міста НП", max_length=100, blank=True)
-    warehouse_name = models.CharField("Відділення НП", max_length=300)
-    warehouse_ref = models.CharField("Ref відділення НП", max_length=100, blank=True)
+    size = models.CharField("Розмір", max_length=5, blank=True, default="")
+    city_name = models.CharField("Місто", max_length=200, blank=True, default="")
+    city_ref = models.CharField("Ref міста НП", max_length=100, blank=True, default="")
+    warehouse_name = models.CharField("Відділення НП", max_length=300, blank=True, default="")
+    warehouse_ref = models.CharField("Ref відділення НП", max_length=100, blank=True, default="")
     comment = models.TextField("Коментар", blank=True)
 
     ad_group = models.CharField("Група оголошень (?g=)", max_length=100, blank=True, default="")

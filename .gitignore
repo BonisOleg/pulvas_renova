@@ -44,3 +44,7 @@ build/
 .coverage
 htmlcov/
 .pytest_cache/
+
+# Ads data (keep locally, never push)
+Pulvas_Google_Ads_Ads_*.csv
+LANDING_PAGE_REDESIGN_TZ.md
