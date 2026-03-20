@@ -22,7 +22,7 @@
         Ім'я <span class="form-label-optional">(необов'язково)</span>
       </label>
       <input
-        class="form-input"
+        class="form-input{% if form.name.errors %} form-input--error{% endif %}"
         type="text"
         id="{{ form.name.id_for_label }}"
         name="{{ form.name.html_name }}"
@@ -36,7 +36,7 @@
     <div class="form-field">
       <label class="form-label" for="{{ form.phone.id_for_label }}">Телефон</label>
       <input
-        class="form-input"
+        class="form-input{% if form.phone.errors %} form-input--error{% endif %}"
         type="tel"
         id="{{ form.phone.id_for_label }}"
         name="{{ form.phone.html_name }}"

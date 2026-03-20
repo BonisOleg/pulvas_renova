@@ -69,8 +69,13 @@
 
 .field-error {
   font-size: 0.78rem;
-  color: #c0392b;
+  color: #ff6b6b;
   margin-top: 0.3rem;
+}
+
+.form-input--error,
+.form-textarea--error {
+  border-color: #ff6b6b;
 }
 
 /* ── NP Autocomplete ─────────────────────── */

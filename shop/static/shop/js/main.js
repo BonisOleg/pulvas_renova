@@ -257,5 +257,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initPhoneMask();
 });
 
-// Після HTMX-swap (форма може бути перемальована) — переініціалізувати маску
-document.addEventListener('htmx:afterSwap', initPhoneMask);
+// Після HTMX-swap — переініціалізувати маску та проскролити до першої помилки
+document.addEventListener('htmx:afterSwap', (e) => {
+  initPhoneMask();
+  const firstError = e.detail.target.querySelector('.field-error');
+  if (firstError) {
+    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
