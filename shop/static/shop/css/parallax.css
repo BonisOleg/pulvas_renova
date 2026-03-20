@@ -85,25 +85,14 @@
 .how-it-works,
 .counters {
   min-height: auto;
-  scroll-snap-align: none;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 section[data-bg] {
   position: relative;
-}
-
-/* ── Scroll-snap (section paging) ────────────────────────────────────── */
-/*
- * proximity (not mandatory) lets tall sections (order form on mobile)
- * scroll freely internally without being force-snapped mid-content.
- * iOS Safari 15+ and Android Chrome support scroll-snap natively.
- */
-html {
-  scroll-snap-type: y proximity;
-}
-
-section[data-bg] {
-  scroll-snap-align: start;
   min-height: 100svh;
 }
 

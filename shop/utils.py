@@ -81,15 +81,15 @@ AD_GROUPS: dict[str, dict] = {
     # ── ACCESSORIES ───────────────────────────────────────────────────────────
 
     "Аксесуари_Ремені_Гаманці": {
-        "title": "Ремені та гаманці Louis Vuitton, Gucci, Hermès — PulvasStore",
+        "title": "Аксесуари Louis Vuitton, Gucci, Hermès — ремені, гаманці та більше — PulvasStore",
         "description": (
-            "Купити ремінь або гаманець Louis Vuitton, Gucci, Hermès, Prada "
+            "Купити ремені, гаманці та аксесуари Louis Vuitton, Gucci, Hermès, Prada "
             "з доставкою по всьому світу. Преміальна якість."
         ),
-        "hero_eyebrow": "Ремені та гаманці · Люксові аксесуари",
-        "hero_heading": "Ремінь або гаманець LV, Gucci, Hermès — як оригінал",
+        "hero_eyebrow": "Люксові аксесуари · LV, Gucci, Hermès",
+        "hero_heading": "Ремені, гаманці та аксесуари LV, Gucci, Hermès — як оригінал",
         "hero_subtitle": (
-            "Луї Віттон, Gucci, Hermès — шкіряні аксесуари бездоганної якості."
+            "Луї Віттон, Gucci, Hermès — весь асортимент шкіряних аксесуарів бездоганної якості."
         ),
         "features_label": "Чому PulvasStore",
         "features": _DEFAULT_FEATURES,
