@@ -34,7 +34,7 @@ class Order(models.Model):
 
     SIZES = ["39", "40", "41", "42", "43", "44", "45"]
 
-    name = models.CharField("Ім'я", max_length=150)
+    name = models.CharField("Ім'я", max_length=150, blank=True, default="")
     phone = models.CharField("Телефон", max_length=20)
     shoe_color = models.ForeignKey(
         ShoeColor,
@@ -67,5 +67,6 @@ class Order(models.Model):
         verbose_name_plural = "Замовлення"
         ordering = ["-created_at"]
 
-    def __str__(self):
-        return f"#{self.pk} — {self.name} ({self.phone})"
+    def __str__(self) -> str:
+        label = self.name or "—"
+        return f"#{self.pk} — {label} ({self.phone})"

@@ -21,7 +21,13 @@ class OrderForm(forms.ModelForm):
                 attrs={"placeholder": "Ваше ім'я", "autocomplete": "name"}
             ),
             "phone": forms.TextInput(
-                attrs={"placeholder": "+380", "type": "tel", "autocomplete": "tel"}
+                attrs={
+                    "placeholder": "+380 (XX) XXX-XX-XX",
+                    "type": "tel",
+                    "autocomplete": "tel",
+                    "data-phone-mask": "",
+                    "inputmode": "tel",
+                }
             ),
             "comment": forms.Textarea(
                 attrs={
@@ -40,9 +46,23 @@ class OrderForm(forms.ModelForm):
             "utm_term": forms.HiddenInput(),
         }
 
-    def clean_phone(self):
-        phone = self.cleaned_data.get("phone", "").strip()
-        digits = "".join(c for c in phone if c.isdigit())
-        if len(digits) < 10:
-            raise forms.ValidationError("Введіть коректний номер телефону")
-        return phone
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        self.fields["name"].required = False
+
+    def clean_phone(self) -> str:
+        raw: str = self.cleaned_data.get("phone", "").strip()
+        digits = "".join(c for c in raw if c.isdigit())
+
+        # Normalize: leading 0 → 380..., leading 380... stays as-is
+        if digits.startswith("0") and len(digits) == 10:
+            digits = "38" + digits
+        elif digits.startswith("80") and len(digits) == 11:
+            digits = "3" + digits
+
+        if len(digits) != 12 or not digits.startswith("380"):
+            raise forms.ValidationError(
+                "Введіть коректний номер телефону (+380 XX XXX-XX-XX)"
+            )
+
+        return f"+{digits}"

@@ -97,9 +97,143 @@ function initScrollButtons() {
   });
 }
 
+/* ── Ukrainian phone mask (+380 XX XXX-XX-XX) ── */
+function initPhoneMask() {
+  const PREFIX = '+380';
+
+  function formatDigits(digits) {
+    // digits — рівно 9 цифр оператора (після 380)
+    const d = digits.padEnd(9, '_').split('');
+    return (
+      `${PREFIX} (${d[0]}${d[1]}) ` +
+      `${d[2]}${d[3]}${d[4]}-${d[5]}${d[6]}-${d[7]}${d[8]}`
+    );
+  }
+
+  function extractDigits(value) {
+    // повертає лише цифри після +380
+    const raw = value.replace(/\D/g, '');
+    if (raw.startsWith('380')) return raw.slice(3);
+    if (raw.startsWith('38')) return raw.slice(2);
+    if (raw.startsWith('3')) return raw.slice(1);
+    return raw;
+  }
+
+  function applyMask(input) {
+    const pos = input.selectionStart;
+    const before = input.value;
+    const digits = extractDigits(before).replace(/\D/g, '').slice(0, 9);
+
+    if (digits.length === 0) {
+      input.value = '';
+      return;
+    }
+
+    const formatted = formatDigits(digits).replace(/_/g, '');
+    input.value = formatted;
+
+    // відновити позицію курсору приблизно там само
+    const diff = formatted.length - before.length;
+    const newPos = Math.max(PREFIX.length + 1, Math.min(pos + diff, formatted.length));
+    input.setSelectionRange(newPos, newPos);
+  }
+
+  function lockPrefix(input) {
+    if (!input.value.startsWith(PREFIX)) {
+      const digits = extractDigits(input.value).slice(0, 9);
+      input.value = digits.length ? formatDigits(digits).replace(/_/g, '') : '';
+    }
+  }
+
+  document.querySelectorAll('input[data-phone-mask]').forEach(input => {
+    // Ініціалізація: якщо є значення (після помилки серверу) — відформатувати
+    if (input.value) {
+      const digits = extractDigits(input.value).slice(0, 9);
+      if (digits.length) input.value = formatDigits(digits).replace(/_/g, '');
+    }
+
+    input.addEventListener('focus', () => {
+      if (!input.value) {
+        input.value = PREFIX + ' ';
+        input.setSelectionRange(input.value.length, input.value.length);
+      } else {
+        lockPrefix(input);
+      }
+    });
+
+    input.addEventListener('blur', () => {
+      const digits = extractDigits(input.value);
+      if (digits.length === 0) {
+        input.value = '';
+      }
+    });
+
+    input.addEventListener('keydown', e => {
+      const pos = input.selectionStart;
+      const minPos = PREFIX.length + 1; // після "+380 "
+
+      // Заборонити видалення префіксу
+      if ((e.key === 'Backspace' || e.key === 'Delete') && pos <= minPos) {
+        e.preventDefault();
+        input.setSelectionRange(minPos, minPos);
+        return;
+      }
+
+      // Дозволити лише цифри, спецклавіші та клавіші навігації
+      const allowed = [
+        'Backspace', 'Delete', 'Tab', 'Escape', 'Enter',
+        'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown',
+        'Home', 'End',
+      ];
+      if (!allowed.includes(e.key) && !/^\d$/.test(e.key) && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+      }
+    });
+
+    input.addEventListener('input', () => {
+      lockPrefix(input);
+      applyMask(input);
+    });
+
+    input.addEventListener('paste', e => {
+      e.preventDefault();
+      const pasted = (e.clipboardData || window.clipboardData).getData('text');
+      const allDigits = pasted.replace(/\D/g, '');
+
+      let operatorDigits;
+      if (allDigits.startsWith('380')) {
+        operatorDigits = allDigits.slice(3, 12);
+      } else if (allDigits.startsWith('38')) {
+        operatorDigits = allDigits.slice(2, 11);
+      } else if (allDigits.startsWith('0')) {
+        operatorDigits = allDigits.slice(1, 10);
+      } else {
+        operatorDigits = allDigits.slice(0, 9);
+      }
+
+      if (operatorDigits.length) {
+        input.value = formatDigits(operatorDigits.slice(0, 9)).replace(/_/g, '');
+        input.setSelectionRange(input.value.length, input.value.length);
+      }
+    });
+
+    // Не дати курсору потрапити до префіксу при кліку
+    input.addEventListener('click', () => {
+      if (input.value && input.selectionStart < PREFIX.length + 1) {
+        const pos = PREFIX.length + 1;
+        input.setSelectionRange(pos, pos);
+      }
+    });
+  });
+}
+
 /* ── Init ─────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   initScrollButtons();
   initColorSwatches();
   initBgGallery();
+  initPhoneMask();
 });
+
+// Після HTMX-swap (форма може бути перемальована) — переініціалізувати маску
+document.addEventListener('htmx:afterSwap', initPhoneMask);

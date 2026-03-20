@@ -18,7 +18,9 @@
 
   <div class="form-row">
     <div class="form-field">
-      <label class="form-label" for="{{ form.name.id_for_label }}">Ім'я</label>
+      <label class="form-label" for="{{ form.name.id_for_label }}">
+        Ім'я <span class="form-label-optional">(необов'язково)</span>
+      </label>
       <input
         class="form-input"
         type="text"
@@ -27,7 +29,6 @@
         value="{{ form.name.value|default:'' }}"
         placeholder="Ваше ім'я"
         autocomplete="name"
-        required
       >
       {% if form.name.errors %}<p class="field-error">{{ form.name.errors.0 }}</p>{% endif %}
     </div>
@@ -40,8 +41,10 @@
         id="{{ form.phone.id_for_label }}"
         name="{{ form.phone.html_name }}"
         value="{{ form.phone.value|default:'' }}"
-        placeholder="+380"
+        placeholder="+380 (XX) XXX-XX-XX"
         autocomplete="tel"
+        inputmode="tel"
+        data-phone-mask
         required
       >
       {% if form.phone.errors %}<p class="field-error">{{ form.phone.errors.0 }}</p>{% endif %}
