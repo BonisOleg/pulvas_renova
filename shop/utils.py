@@ -13,7 +13,7 @@ _MATERIAL_03 = {
     "title": "Бездоганна збірка",
     "text": (
         "Акуратні подвійні шви, точна геометрія — кожен виріб "
-        "не відрізниш від оригіналу навіть поруч."
+        "виконаний з абсолютною точністю та увагою до деталей."
     ),
 }
 
@@ -21,17 +21,16 @@ _MATERIAL_04 = {
     "num": "04",
     "title": "Комфорт та посадка",
     "text": (
-        "Посадка, крій і форма — все відтворено до деталей, "
-        "щоб річ сиділа так само, як у бутику."
+        "Бездоганний крій і форма — речі ідеально сідають по фігурі."
     ),
 }
 
 _DEFAULT_FEATURES: list[dict] = [
     {
         "num": "01",
-        "title": "Якість 1:1 до оригіналу",
+        "title": "Безкомпромісна якість",
         "text": (
-            "Матеріали, дизайн, фурнітура, упаковка та бірки — все як у бутику. "
+            "Преміальні матеріали, надійна фурнітура та фірмове пакування. "
             "Ми перевіряємо кожен виріб перед відправкою."
         ),
     },
@@ -87,7 +86,7 @@ AD_GROUPS: dict[str, dict] = {
             "з доставкою по всьому світу. Преміальна якість."
         ),
         "hero_eyebrow": "Люксові аксесуари · LV, Gucci, Hermès",
-        "hero_heading": "Ремені, гаманці та аксесуари LV, Gucci, Hermès — як оригінал",
+        "hero_heading": "Ремені, гаманці та аксесуари LV, Gucci, Hermès — бездоганна якість",
         "hero_subtitle": (
             "Луї Віттон, Gucci, Hermès — весь асортимент шкіряних аксесуарів бездоганної якості."
         ),
@@ -132,9 +131,9 @@ AD_GROUPS: dict[str, dict] = {
             "браслет Hermès з доставкою по всьому світу."
         ),
         "hero_eyebrow": "Аксесуари · Шарфи, окуляри та інше",
-        "hero_heading": "Аксесуари Burberry, Chanel, Dior — як оригінал",
+        "hero_heading": "Аксесуари Burberry, Chanel, Dior — преміальний вибір",
         "hero_subtitle": (
-            "Шарфи Burberry, окуляри Chanel і Dior — якість, яку не відрізниш."
+            "Шарфи Burberry, окуляри Chanel і Dior — якість, що вражає з першого дотику."
         ),
         "features_label": "Чому PulvasStore",
         "features": _DEFAULT_FEATURES,
@@ -179,7 +178,7 @@ AD_GROUPS: dict[str, dict] = {
             "Доставка по всьому світу."
         ),
         "hero_eyebrow": "Взуття Balenciaga · Бездоганна якість",
-        "hero_heading": "Кросівки Balenciaga — як оригінал, ціна в рази нижча",
+        "hero_heading": "Кросівки Balenciaga — преміальна якість та культовий дизайн",
         "hero_subtitle": (
             "Triple S, Track, Runner, Speed — для жінок і чоловіків."
         ),
@@ -227,7 +226,7 @@ AD_GROUPS: dict[str, dict] = {
             "Доставка по всьому світу."
         ),
         "hero_eyebrow": "Взуття Dior · Бездоганна якість",
-        "hero_heading": "Кеди та кросівки Dior — як оригінал, ціна в рази нижча",
+        "hero_heading": "Кеди та кросівки Dior — бездоганна якість та преміальний стиль",
         "hero_subtitle": (
             "B27, B22, Walk'n'Dior — весь культовий асортимент Dior."
         ),
@@ -273,7 +272,7 @@ AD_GROUPS: dict[str, dict] = {
             "Доставка по всьому світу."
         ),
         "hero_eyebrow": "Взуття Gucci · Бездоганна якість",
-        "hero_heading": "Кросівки та лофери Gucci — як оригінал, ціна в рази нижча",
+        "hero_heading": "Кросівки та лофери Gucci — преміальна якість та розкішний стиль",
         "hero_subtitle": (
             "Rhyton, Ace, лофери Horsebit — для жінок і чоловіків."
         ),
@@ -320,7 +319,7 @@ AD_GROUPS: dict[str, dict] = {
             "Доставка по всьому світу."
         ),
         "hero_eyebrow": "Взуття Louis Vuitton · Бездоганна якість",
-        "hero_heading": "Кросівки Louis Vuitton — як оригінал, ціна в рази нижча",
+        "hero_heading": "Кросівки Louis Vuitton — бездоганна якість та культова монограма",
         "hero_subtitle": (
             "Trainer, Archlight, Run Away — весь асортимент LV."
         ),
@@ -367,7 +366,7 @@ AD_GROUPS: dict[str, dict] = {
             "з доставкою по всьому світу. Преміальна якість."
         ),
         "hero_eyebrow": "Брендове взуття · Бездоганна якість",
-        "hero_heading": "Лофери Loro Piana, кросівки Valentino, Prada — як оригінал",
+        "hero_heading": "Лофери Loro Piana, кросівки Valentino, Prada — преміальна якість",
         "hero_subtitle": (
             "Bottega Veneta, Valentino, Prada — добірне взуття від провідних брендів."
         ),
@@ -414,7 +413,7 @@ AD_GROUPS: dict[str, dict] = {
             "Доставка по всьому світу."
         ),
         "hero_eyebrow": "Брендове взуття · Люксова якість",
-        "hero_heading": "Брендові кросівки та туфлі — як оригінал, ціна в рази нижча",
+        "hero_heading": "Брендові кросівки та туфлі — преміальна якість та вишуканість",
         "hero_subtitle": (
             "Louis Vuitton, Gucci, Balenciaga, Dior — весь асортимент взуття."
         ),
@@ -463,7 +462,7 @@ AD_GROUPS: dict[str, dict] = {
             "Доставка по всьому світу."
         ),
         "hero_eyebrow": "Одяг Balenciaga · Бездоганна якість",
-        "hero_heading": "Футболки, худі, пуховики Balenciaga — як оригінал",
+        "hero_heading": "Футболки, худі, пуховики Balenciaga — преміальна якість",
         "hero_subtitle": (
             "Paris, Speed, Gap — весь культовий одяг Balenciaga."
         ),
@@ -510,7 +509,7 @@ AD_GROUPS: dict[str, dict] = {
             "Доставка по всьому світу."
         ),
         "hero_eyebrow": "Одяг Gucci · Бездоганна якість",
-        "hero_heading": "Футболки, худі, костюми Gucci — як оригінал",
+        "hero_heading": "Футболки, худі, костюми Gucci — преміальна якість",
         "hero_subtitle": (
             "Логотипний принт, тигр, полотно GG — весь асортимент одягу Gucci."
         ),
@@ -557,7 +556,7 @@ AD_GROUPS: dict[str, dict] = {
             "Доставка по всьому світу."
         ),
         "hero_eyebrow": "Одяг Loro Piana · Люксова якість",
-        "hero_heading": "Куртки та костюми Loro Piana — як оригінал",
+        "hero_heading": "Куртки та костюми Loro Piana — преміальна якість та тиха розкіш",
         "hero_subtitle": (
             "Кашемірові костюми та пуховики Loro Piana — "
             "для тих, хто цінує тишу розкоші."
@@ -603,7 +602,7 @@ AD_GROUPS: dict[str, dict] = {
             "Доставка по всьому світу."
         ),
         "hero_eyebrow": "Одяг Moncler · Тепло і стиль",
-        "hero_heading": "Пуховики та куртки Moncler — як оригінал, ціна в рази нижча",
+        "hero_heading": "Пуховики та куртки Moncler — преміальна якість та бездоганне тепло",
         "hero_subtitle": (
             "Легкі, теплі, з бездоганним кроєм — "
             "куртки Moncler для жінок і чоловіків."
@@ -651,7 +650,7 @@ AD_GROUPS: dict[str, dict] = {
             "Доставка по всьому світу."
         ),
         "hero_eyebrow": "Одяг Stone Island · Бездоганна якість",
-        "hero_heading": "Куртки та худі Stone Island — як оригінал",
+        "hero_heading": "Куртки та худі Stone Island — преміальна якість",
         "hero_subtitle": (
             "Shadow Project, Ghost — весь асортимент Stone Island."
         ),
@@ -700,7 +699,7 @@ AD_GROUPS: dict[str, dict] = {
             "Клітчасті сумки, рюкзаки, через плечо. Доставка по всьому світу."
         ),
         "hero_eyebrow": "Сумки Balenciaga · Іконічний стиль",
-        "hero_heading": "Сумки Balenciaga — як оригінал, ціна в рази нижча",
+        "hero_heading": "Сумки Balenciaga — преміальна якість та іконічний стиль",
         "hero_subtitle": (
             "City, Le Cagole, клітчата шопінг-бег — весь асортимент Balenciaga."
         ),
@@ -747,7 +746,7 @@ AD_GROUPS: dict[str, dict] = {
             "з доставкою по всьому світу."
         ),
         "hero_eyebrow": "Сумки Chanel · Вічна класика",
-        "hero_heading": "Сумки Chanel — як оригінал, ціна в рази нижча",
+        "hero_heading": "Сумки Chanel — бездоганна якість та вічна класика",
         "hero_subtitle": (
             "2.55, Classic Flap, 22 — весь культовий асортимент Chanel."
         ),
@@ -793,7 +792,7 @@ AD_GROUPS: dict[str, dict] = {
             "з доставкою по всьому світу."
         ),
         "hero_eyebrow": "Сумки Dior · Жіночність та стиль",
-        "hero_heading": "Сумки Dior — як оригінал, ціна в рази нижча",
+        "hero_heading": "Сумки Dior — преміальна якість та витончений стиль",
         "hero_subtitle": (
             "Lady Dior, Saddle, Miss Dior — весь асортимент Dior."
         ),
@@ -839,7 +838,7 @@ AD_GROUPS: dict[str, dict] = {
             "з доставкою по всьому світу."
         ),
         "hero_eyebrow": "Сумки Gucci · Іконічний стиль",
-        "hero_heading": "Сумки Gucci — як оригінал, ціна в рази нижча",
+        "hero_heading": "Сумки Gucci — преміальна якість та іконічний стиль",
         "hero_subtitle": (
             "Ophidia, Dionysus, Jackie, Horsebit — весь асортимент Gucci."
         ),
@@ -886,10 +885,10 @@ AD_GROUPS: dict[str, dict] = {
             "Преміальна якість."
         ),
         "hero_eyebrow": "Сумки Hermès · Легендарна якість",
-        "hero_heading": "Birkin, Kelly, Constance Hermès — як оригінал",
+        "hero_heading": "Birkin, Kelly, Constance Hermès — легендарна якість",
         "hero_subtitle": (
             "Добірна шкіра, ручна збірка, іконічні замки — "
-            "все як у справжньому Hermès."
+            "бездоганність у кожному шві та легендарний дизайн."
         ),
         "features_label": "Чому PulvasStore",
         "features": _DEFAULT_FEATURES,
@@ -934,7 +933,7 @@ AD_GROUPS: dict[str, dict] = {
             "з доставкою по всьому світу."
         ),
         "hero_eyebrow": "Сумки Louis Vuitton · Класика",
-        "hero_heading": "Сумки Louis Vuitton — як оригінал, ціна в рази нижча",
+        "hero_heading": "Сумки Louis Vuitton — бездоганна якість та вічна класика",
         "hero_subtitle": (
             "Speedy, Neverfull, Alma, Pochette — весь асортимент LV."
         ),
@@ -982,7 +981,7 @@ AD_GROUPS: dict[str, dict] = {
             "з доставкою по всьому світу."
         ),
         "hero_eyebrow": "Сумки Prada · Бездоганна якість",
-        "hero_heading": "Сумки Prada — як оригінал, ціна в рази нижча",
+        "hero_heading": "Сумки Prada — преміальна якість та бездоганний стиль",
         "hero_subtitle": (
             "Re-Edition, Galleria, нейлон Milano — весь асортимент Prada."
         ),
@@ -1028,7 +1027,7 @@ AD_GROUPS: dict[str, dict] = {
             "з доставкою по всьому світу."
         ),
         "hero_eyebrow": "Сумки Saint Laurent · Стиль і харизма",
-        "hero_heading": "Сумки YSL Saint Laurent — як оригінал, ціна в рази нижча",
+        "hero_heading": "Сумки YSL Saint Laurent — преміальна якість та харизматичний стиль",
         "hero_subtitle": (
             "Sac de Jour, Niki, Solferino — весь асортимент Saint Laurent."
         ),
@@ -1075,7 +1074,7 @@ AD_GROUPS: dict[str, dict] = {
             "з доставкою по всьому світу."
         ),
         "hero_eyebrow": "Брендові сумки · Люксова якість",
-        "hero_heading": "Сумки Valentino, Celine, Fendi, Bottega — як оригінал",
+        "hero_heading": "Сумки Valentino, Celine, Fendi, Bottega — преміальна якість",
         "hero_subtitle": (
             "Burberry, Loewe, Givenchy, Loro Piana — увесь світ люксових сумок."
         ),
