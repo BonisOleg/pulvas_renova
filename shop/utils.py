@@ -412,7 +412,7 @@ AD_GROUPS: dict[str, dict] = {
             "Купити брендові кросівки, лофери або туфлі для жінок і чоловіків. "
             "Доставка по всьому світу."
         ),
-        "hero_eyebrow": "Брендове взуття · Люксова якість",
+        "hero_eyebrow": "Брендове взуття · Преміальний стиль",
         "hero_heading": "Брендові кросівки та туфлі — преміальна якість та вишуканість",
         "hero_subtitle": (
             "Louis Vuitton, Gucci, Balenciaga, Dior — весь асортимент взуття."
@@ -555,7 +555,7 @@ AD_GROUPS: dict[str, dict] = {
             "Купити куртку або костюм Loro Piana. Кашемір і преміальні тканини. "
             "Доставка по всьому світу."
         ),
-        "hero_eyebrow": "Одяг Loro Piana · Люксова якість",
+        "hero_eyebrow": "Одяг Loro Piana · Преміальний стиль",
         "hero_heading": "Куртки та костюми Loro Piana — преміальна якість та тиха розкіш",
         "hero_subtitle": (
             "Кашемірові костюми та пуховики Loro Piana — "
@@ -1073,10 +1073,10 @@ AD_GROUPS: dict[str, dict] = {
             "Купити сумку Valentino, Celine, Burberry, Fendi, Loewe або Bottega Veneta "
             "з доставкою по всьому світу."
         ),
-        "hero_eyebrow": "Брендові сумки · Люксова якість",
+        "hero_eyebrow": "Брендові сумки · Преміальний стиль",
         "hero_heading": "Сумки Valentino, Celine, Fendi, Bottega — преміальна якість",
         "hero_subtitle": (
-            "Burberry, Loewe, Givenchy, Loro Piana — увесь світ люксових сумок."
+            "Burberry, Loewe, Givenchy, Loro Piana — увесь світ преміальних сумок."
         ),
         "features_label": "Чому PulvasStore",
         "features": _DEFAULT_FEATURES,
